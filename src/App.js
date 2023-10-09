@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import TodoList from './components/TodoList/TodoList';
+
 const Component = styled.div`
     display: flex;
     background-color: #fafafa;
@@ -29,6 +31,7 @@ const App = () => (
     <Component>
         <Wrapper>
             <Header>Todo List</Header>
+            <TodoList />
         </Wrapper>
     </Component>
 )
