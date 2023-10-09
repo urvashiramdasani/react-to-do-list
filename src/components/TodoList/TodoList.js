@@ -14,7 +14,24 @@ const Wrapper = styled.div`
 
 class TodoList extends Component {
     state = {
-        mode: 'all'
+        mode: 'all',
+        items: [
+            {
+                id: 1,
+                label: 'Make the <List /> component',
+                completed: false
+            },
+            {
+                id: 2,
+                label: 'Finish the Todo List',
+                completed: false
+            },
+            {
+                id: 3,
+                label: 'Drink a cup of tea',
+                completed: true
+            }
+        ]
     }
 
     handleModeChange = mode => () => {
@@ -22,13 +39,13 @@ class TodoList extends Component {
     }
 
     render() {
-        const { mode } = this.state
+        const { mode, items } = this.state
 
         return (
             <Wrapper>
                 <Filter mode={mode} onModeChange={this.handleModeChange} />
                 <Input />
-                <List />
+                <List items={items} />
             </Wrapper>
         )
     }
