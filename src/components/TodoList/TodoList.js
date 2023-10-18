@@ -38,6 +38,21 @@ class TodoList extends Component {
         this.setState( { mode } )
     }
 
+    handleComplete = id => () => {
+        const newItems = [...this.state.items]
+        const filteredItem = newItems.filter((item) => item.id === id)[0]
+
+        filteredItem.completed = !filteredItem.completed
+
+        this.setState({ items : newItems })
+    }
+
+    handleDelete = id => () => {
+        const filteredItems = this.state.items.filter((item) => item.id !== id)
+
+        this.setState({ items : filteredItems })
+    }
+
     render() {
         const { mode, items } = this.state
 
@@ -45,7 +60,7 @@ class TodoList extends Component {
             <Wrapper>
                 <Filter mode={mode} onModeChange={this.handleModeChange} />
                 <Input />
-                <List items={items} />
+                <List items={items} onComplete={this.handleComplete} onDelete={this.handleDelete} />
             </Wrapper>
         )
     }

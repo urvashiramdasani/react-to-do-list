@@ -45,6 +45,9 @@ const Label = styled.p`
     margin: 0 0 0 0.5rem;
     flex: 1;
 
+    text-decoration: ${props => props.completed ? 'line-through' : 'none'};
+    color: ${props => props.completed ? '#4A5568' : '#000'};
+
     &:hover {
         cursor: pointer;
         color: #4a5568;
@@ -57,15 +60,26 @@ const Delete = styled.button`
     border: 0;
 `
 
-const List = ({ items }) => (
+const NoItems = styled.p`
+    margin: 0;
+    text-align: center;
+    color: #4A5568;
+`
+
+const List = ({ items, onComplete, onDelete }) => (
     <Component>
-        {items.map(item => (
-            <Item key={item.id}>
-                <Complete completed={item.completed}>{item.completed && '✅' }</Complete>
-                <Label>{item.label}</Label>
-                <Delete>❌</Delete>
+        {items.map(({ id, completed, label }) => (
+            <Item key={id}>
+                <Complete completed={completed} onClick={onComplete(id)}>
+                    {completed && <span role='img' aria-label="complete">✅</span> }
+                </Complete>
+                <Label completed={completed}>{label}</Label>
+                <Delete onClick={onDelete(id)}>
+                    <span role='img' aria-label="delete">❌</span>
+                </Delete>
             </Item>
         ))}
+        {items.length === 0 && <NoItems>You have no items</NoItems>}
     </Component>
 )
 
