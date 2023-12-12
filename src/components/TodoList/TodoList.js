@@ -19,17 +19,17 @@ class TodoList extends Component {
         items: [
             {
                 id: 1,
-                label: 'Make the <List /> component',
+                label: 'Try out To Do List 💪🏻',
                 completed: false
             },
             {
                 id: 2,
-                label: 'Finish the Todo List',
+                label: 'Give Feedback 😊',
                 completed: false
             },
             {
                 id: 3,
-                label: 'Drink a cup of tea',
+                label: 'Create React To Do List 👩🏻‍💻',
                 completed: true
             }
         ]
