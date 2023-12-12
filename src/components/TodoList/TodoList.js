@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { v4 } from "uuid";
 
 import Filter from './Filter';
 import Input from './Input';
@@ -53,14 +54,36 @@ class TodoList extends Component {
         this.setState({ items : filteredItems })
     }
 
+    handleTaskAdd = (value) => {
+        const task = {
+            id: v4(),
+            label: value,
+            completed: false
+        }
+
+        const newItems = [task, ...this.state.items]
+
+        this.setState({ items: newItems });
+    }
+
     render() {
         const { mode, items } = this.state
+
+        let filteredItems = []
+
+        if(mode === 'completed') {
+            filteredItems = items.filter(item => item.completed)
+        } else if(mode === 'active') {
+            filteredItems = items.filter(item => !item.completed)
+        } else {
+            filteredItems = items;
+        }
 
         return (
             <Wrapper>
                 <Filter mode={mode} onModeChange={this.handleModeChange} />
-                <Input />
-                <List items={items} onComplete={this.handleComplete} onDelete={this.handleDelete} />
+                <Input onTaskAdd={this.handleTaskAdd} />
+                <List items={filteredItems} onComplete={this.handleComplete} onDelete={this.handleDelete} />
             </Wrapper>
         )
     }

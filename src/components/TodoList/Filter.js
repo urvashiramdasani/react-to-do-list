@@ -41,12 +41,12 @@ const buttons = [
         label: 'All'
     },
     {
-        value: 'completed',
-        label: 'Completed'
-    },
-    {
         value: 'active',
         label: 'Active'
+    },
+    {
+        value: 'completed',
+        label: 'Completed'
     }
 ]
 
